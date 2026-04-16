@@ -9,7 +9,18 @@ class Board
   end
 
   def row_check(row, icon)
-    grid[row].each_cons(4) do |four|
+    four_in_row?(grid[row], icon)
+  end
+
+  def column_check(column, icon)
+    column_array = grid.map { |row| row[column] }
+    four_in_row?(column_array, icon)
+  end
+
+  private
+
+  def four_in_row?(array, icon)
+    array.each_cons(4) do |four|
       return true if four.all? { |value| value == icon }
     end
     false

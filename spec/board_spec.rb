@@ -34,4 +34,13 @@ RSpec.describe Board do
       expect(board.row_check(0, 'X')).to be(false)
     end
   end
+
+  describe '#column_check' do
+    let(:board) { Board.new }
+    it 'checks if 4 in a column consecutively of the same icon returns true' do
+      (0..3).each { |index| board.grid[index][0] = 'X' }
+
+      expect(board.column_check(0, 'X')).to be(true)
+    end
+  end
 end
