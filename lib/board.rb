@@ -17,6 +17,10 @@ class Board
     four_in_row?(column_array, icon)
   end
 
+  def diagonal_right_check(row, column, icon)
+    # write this
+  end
+
   private
 
   def four_in_row?(array, icon)

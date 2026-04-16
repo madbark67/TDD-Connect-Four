@@ -37,10 +37,19 @@ RSpec.describe Board do
 
   describe '#column_check' do
     let(:board) { Board.new }
-    it 'checks if 4 in a column consecutively of the same icon returns true' do
+    it 'checks if correct cells are read for 4 in a row logic' do
       (0..3).each { |index| board.grid[index][0] = 'X' }
 
       expect(board.column_check(0, 'X')).to be(true)
+    end
+  end
+
+  describe '#diagonal_right_check' do
+    let(:board) { Board.new }
+    it 'checks if correct cells are read for 4 in a row logic' do
+      (0..3).each { |index| board.grid[index][index] = 'X' }
+
+      expect(board.diagonal_right_check(0, 0, 'X')).to be(true)
     end
   end
 end
