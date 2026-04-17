@@ -104,4 +104,26 @@ RSpec.describe Board do
       expect(board.full?).to be(true)
     end
   end
+
+  describe '#column_full?' do
+    let(:board) { Board.new }
+    it 'returns false when column is not yet full' do
+      expect(board.column_full?(0)).to be(false)
+    end
+
+    it 'returns true when column is full' do
+      board.grid.each { |row| row.fill('O') }
+
+      expect(board.column_full?(0)).to be(true)
+    end
+  end
+
+  describe '#add_piece' do
+    let(:board) { Board.new }
+    it 'piece can be added to empty grid' do
+    end
+
+    it 'piece can be added to non empty column in grid' do
+    end
+  end
 end

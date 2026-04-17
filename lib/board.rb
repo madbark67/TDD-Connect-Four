@@ -52,6 +52,10 @@ class Board
     grid.flatten.none?(nil)
   end
 
+  def column_full?(column)
+    grid.all? { |row| !row[column].nil? }
+  end
+
   private
 
   def four_in_row?(array, icon)
