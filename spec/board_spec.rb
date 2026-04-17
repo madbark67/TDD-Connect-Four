@@ -121,9 +121,14 @@ RSpec.describe Board do
   describe '#add_piece' do
     let(:board) { Board.new }
     it 'piece can be added to empty grid' do
+      board.add_piece(3, 'O')
+      expect(board.grid[5][3]).to eq('O')
     end
 
-    it 'piece can be added to non empty column in grid' do
+    it 'piece can be added to partially filled column' do
+      board.grid[5][3] = 'X'
+      board.add_piece(3, 'O')
+      expect(board.grid[4][3]).to eq('O')
     end
   end
 end

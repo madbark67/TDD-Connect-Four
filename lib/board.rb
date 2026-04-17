@@ -56,6 +56,15 @@ class Board
     grid.all? { |row| !row[column].nil? }
   end
 
+  def add_piece(column, icon)
+    grid.reverse_each do |row|
+      if row[column].nil?
+        row[column] = icon
+        return
+      end
+    end
+  end
+
   private
 
   def four_in_row?(array, icon)
