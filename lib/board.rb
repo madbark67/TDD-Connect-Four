@@ -48,6 +48,10 @@ class Board
       diagonal_left_check(row, column, icon)
   end
 
+  def full?
+    grid.flatten.none?(nil)
+  end
+
   private
 
   def four_in_row?(array, icon)

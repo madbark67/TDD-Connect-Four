@@ -71,7 +71,6 @@ RSpec.describe Board do
     it 'checks if correct cells are read when a middle starting position is given' do
       start_col = 5
       (1..4).each { |index| board.grid[index][start_col -= 1] = 'X' }
-
       expect(board.diagonal_left_check(4, 1, 'X')).to be(true)
     end
   end
@@ -86,6 +85,23 @@ RSpec.describe Board do
       allow(board).to receive(:diagonal_left_check).and_return(false)
 
       expect(board.win?(0, 0, 'X')).to be(true)
+    end
+  end
+
+  describe '#full?' do
+    let(:board) { Board.new }
+    it 'returns false when full is called on empty grid' do
+      expect(board.full?).to be(false)
+    end
+
+    it 'returns false when full is called on a partially filled grid' do
+      board.grid[1][1] = 'X'
+      expect(board.full?).to be(false)
+    end
+
+    it 'returns true when full is called on a filled grid' do
+      board.grid.each { |row| row.fill('X') }
+      expect(board.full?).to be(true)
     end
   end
 end
