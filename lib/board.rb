@@ -41,6 +41,13 @@ class Board
     four_in_row?(left_array, icon)
   end
 
+  def win?(row, column, icon)
+    row_check(row, icon) ||
+      column_check(column, icon) ||
+      diagonal_right_check(row, column, icon) ||
+      diagonal_left_check(row, column, icon)
+  end
+
   private
 
   def four_in_row?(array, icon)

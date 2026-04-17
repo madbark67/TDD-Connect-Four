@@ -75,4 +75,17 @@ RSpec.describe Board do
       expect(board.diagonal_left_check(4, 1, 'X')).to be(true)
     end
   end
+
+  describe '#win?' do
+    let(:board) { Board.new }
+
+    it 'returns true when row_check finds a win' do
+      allow(board).to receive(:row_check).and_return(true)
+      allow(board).to receive(:column_check).and_return(false)
+      allow(board).to receive(:diagonal_right_check).and_return(false)
+      allow(board).to receive(:diagonal_left_check).and_return(false)
+
+      expect(board.win?(0, 0, 'X')).to be(true)
+    end
+  end
 end
