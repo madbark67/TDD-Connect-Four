@@ -18,7 +18,15 @@ class Board
   end
 
   def diagonal_right_check(row, column, icon)
-    # write this
+    start_row = row - [row, column].min
+    start_col = column - [row, column].min
+    right_array = []
+    while start_col < COLS && start_row < ROWS
+      right_array << grid[start_row][start_col]
+      start_col += 1
+      start_row += 1
+    end
+    four_in_row?(right_array, icon)
   end
 
   private

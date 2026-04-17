@@ -52,4 +52,14 @@ RSpec.describe Board do
       expect(board.diagonal_right_check(0, 0, 'X')).to be(true)
     end
   end
+
+  describe '#diagonal_left_check' do
+    let(:board) { Board.new }
+    it 'checks if correct cells are read for 4 in a row logic' do
+      start_col = 7
+      (0..3).each { |index| board.grid[index][start_col -= 1] = 'X' }
+
+      expect(board.diagonal_left_check(0, 6, 'X')).to be(true)
+    end
+  end
 end
