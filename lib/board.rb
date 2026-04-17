@@ -29,6 +29,18 @@ class Board
     four_in_row?(right_array, icon)
   end
 
+  def diagonal_left_check(row, column, icon)
+    start_row = row - [row, COLS - 1 - column].min
+    start_col = column + [row, COLS - 1 - column].min
+    left_array = []
+    while start_row < ROWS && start_col >= 0
+      left_array << grid[start_row][start_col]
+      start_col -= 1
+      start_row += 1
+    end
+    four_in_row?(left_array, icon)
+  end
+
   private
 
   def four_in_row?(array, icon)

@@ -51,6 +51,12 @@ RSpec.describe Board do
 
       expect(board.diagonal_right_check(0, 0, 'X')).to be(true)
     end
+
+    it 'checks if correct cells are read when a middle starting position is given' do
+      (1..4).each { |index| board.grid[index][index] = 'X' }
+
+      expect(board.diagonal_right_check(4, 4, 'X')).to be(true)
+    end
   end
 
   describe '#diagonal_left_check' do
@@ -60,6 +66,13 @@ RSpec.describe Board do
       (0..3).each { |index| board.grid[index][start_col -= 1] = 'X' }
 
       expect(board.diagonal_left_check(0, 6, 'X')).to be(true)
+    end
+
+    it 'checks if correct cells are read when a middle starting position is given' do
+      start_col = 5
+      (1..4).each { |index| board.grid[index][start_col -= 1] = 'X' }
+
+      expect(board.diagonal_left_check(4, 1, 'X')).to be(true)
     end
   end
 end
