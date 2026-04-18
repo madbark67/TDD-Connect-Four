@@ -17,12 +17,16 @@ class Game
         puts "#{@current_player.name} enter your name:"
         @current_player.name = gets.chomp
         break unless @current_player.name.empty?
+
+        puts 'Name cannot be empty'
       end
 
       loop do
         puts "#{@current_player.name} enter your icon:"
         @current_player.icon = gets.chomp
         break unless @current_player.icon.empty?
+
+        puts 'Please select an icon'
       end
       tracker = 1 - tracker
       @current_player = @players[tracker]
