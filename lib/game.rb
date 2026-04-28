@@ -11,7 +11,6 @@ class Game
   end
 
   def setup
-    tracker = 0
     until !@players[0].icon.nil? && !@players[1].icon.nil?
       loop do
         puts "#{@current_player.name} enter your name:"
@@ -28,11 +27,8 @@ class Game
 
         puts 'Please select an icon'
       end
-      tracker = 1 - tracker
-      @current_player = @players[tracker]
-
+      switch_player
     end
-    switch_player
   end
 
   def get_column_input
@@ -49,10 +45,42 @@ class Game
   end
 
   def display_board
-    @board.grid.each { |row| p row }
+    @board.grid.each do |row|
+      puts row.map { |cell| cell.nil? ? '-' : cell }.join(' ')
+    end
   end
 
   def switch_player
     @current_player = @current_player == @players[0] ? @players[1] : @players[0]
+  end
+
+  def play
+    setup
+
+    loop do
+      display_board
+      col_num = get_column_input
+      row_num = @board.add_piece(col_num, @current_player.icon)
+      break if @board.win?(row_num, col_num, @current_player.icon)
+      break if @board.full?
+
+      switch_player
+    end
+
+    if @board.full?
+      puts '============================================='
+      puts 'GAME OVER, THE BOARD IS FULL'
+      puts
+      display_board
+      puts '============================================='
+
+    else
+      puts '============================================='
+      puts "#{@current_player.name} YOU HAVE WON!"
+      puts
+      display_board
+      puts '============================================='
+
+    end
   end
 end
