@@ -57,10 +57,10 @@ class Board
   end
 
   def add_piece(column, icon)
-    grid.reverse_each do |row|
+    grid.reverse_each.with_index do |row, reverse_index|
       if row[column].nil?
         row[column] = icon
-        return
+        return ROWS - 1 - reverse_index
       end
     end
   end

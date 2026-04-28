@@ -2,7 +2,7 @@ require_relative 'board'
 require_relative 'player'
 
 class Game
-  attr_accessor :players
+  attr_accessor :players, :current_player
 
   def initialize
     @players = [Player.new('Player 1', nil), Player.new('Player 2', nil)]
@@ -32,5 +32,27 @@ class Game
       @current_player = @players[tracker]
 
     end
+    switch_player
+  end
+
+  def get_column_input
+    user_input = nil
+    loop do
+      puts "#{@current_player.name} please choose a column 1-7"
+      user_input = gets.chomp.to_i
+      next if user_input < 1 || user_input > 7
+
+      user_input -= 1
+      break unless @board.column_full?(user_input)
+    end
+    user_input
+  end
+
+  def display_board
+    @board.grid.each { |row| p row }
+  end
+
+  def switch_player
+    @current_player = @current_player == @players[0] ? @players[1] : @players[0]
   end
 end
